@@ -1,20 +1,36 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+@(request: play.mvc.Http.Request, webJarsUtil: org.webjars.play.WebJarsUtil)
+<!DOCTYPE html>
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Welcome to Play") {
+<html>
+    <head>
+        <title>Reactive Stock News Dashboard</title>
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @welcome(message, style = "java")
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
-}
+        @Html(webJarsUtil.css("bootstrap.min.css"))
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.min.css")">
+
+    </head>
+    <body data-ws-url="@routes.HomeController.ws.webSocketURL(request)">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="#">Reactive Stocks</a>
+                    <form id="addsymbolform" class="navbar-form pull-right">
+                        <input id="addsymboltext" type="text" class="span2" placeholder="SYMBOL">
+                        <button type="submit" class="btn">Add Stock</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="stocks" class="container">
+
+        </div>
+
+
+        @Html(webJarsUtil.script("jquery.min.js"))
+        @Html(webJarsUtil.script("jquery.flot.js"))
+        <script type='text/javascript' src='@routes.Assets.at("javascripts/index.js")'></script>
+    </body>
+</html>
