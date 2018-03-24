@@ -3,34 +3,32 @@
 
 <html>
     <head>
-        <title>Reactive Stock News Dashboard</title>
+        <title>WebSockets With Akka Streams</title>
 
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
 
         @Html(webJarsUtil.css("bootstrap.min.css"))
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.min.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
 
     </head>
     <body data-ws-url="@routes.HomeController.ws.webSocketURL(request)">
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="#">Reactive Stocks</a>
-                    <form id="addsymbolform" class="navbar-form pull-right">
-                        <input id="addsymboltext" type="text" class="span2" placeholder="SYMBOL">
-                        <button type="submit" class="btn">Add Stock</button>
-                    </form>
+                    <a class="brand" href="#">WebSockets With Akka Streams</a>
                 </div>
             </div>
         </div>
 
-        <div id="stocks" class="container">
-
+        <div class="container" style="margin-top: 60px;">
+            <a href="javascript:void(0);" id="addDataSetButton" class="btn btn-primary">Click to add new dataset</a>
+            <ul id="resultList">
+            </ul>
         </div>
 
 
         @Html(webJarsUtil.script("jquery.min.js"))
         @Html(webJarsUtil.script("jquery.flot.js"))
-        <script type='text/javascript' src='@routes.Assets.at("javascripts/index.js")'></script>
+        <script type='text/javascript' src='@routes.Assets.versioned("javascripts/app.js")'></script>
     </body>
 </html>
